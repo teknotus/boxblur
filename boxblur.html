@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.8/processing.js"></script>
+<script>
+var a1 = 1.0;
+var a2 = 1.0;
+var b1 = 1.0;
+var b2 = 1.0;
+var c  = 1;
+var d  = 0.2;
+var e  = 0.7;
+var f  = 0.9;
+function setValues(data){
+  a1 = data.a[0];
+  a2 = data.a[1];
+  b1 = data.b[0];
+  b2 = data.b[1];
+  c =  data.c;
+  d =  data.d;
+  e =  data.e;
+  f =  data.f;
+}
+
+  socket_ = new WebSocket('ws://duel.uncontext.com:80');
+  socket_.onmessage = function (event) {
+    console.log(event.data);
+    var parsed = JSON.parse(event.data);
+    setValues(parsed);
+  };
+</script>
+<style type="text/css">
+body {
+ margin: 0;
+}
+canvas {
+  height: 100%;
+  position: fixed;
+  width: 100%;
+}
+</style>
+</head>
+<body>
+<canvas data-processing-sources="boxblur.pde">
+</canvas>
+</body>
+</html>
+
